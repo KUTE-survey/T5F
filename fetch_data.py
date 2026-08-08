@@ -33,7 +33,7 @@ except urllib.error.HTTPError as e:
     exit(1)
 
 # ★★★ 使いたい機器のシリアル番号をここだけ変える ★★★
-TARGET_SERIAL = 'E28400AF'
+TARGET_SERIAL = 'E2BA0923'
 # ★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 
 target = None
@@ -62,7 +62,6 @@ today_str = now.strftime('%Y-%m-%d')
 try:
     existing = json.load(open('data.json'))
     history  = existing.get('history', [])
-    # 今日の日付のデータだけ残す
     history = [h for h in history if h.get('date', today_str) == today_str]
 except:
     history = []
@@ -73,7 +72,7 @@ history.append({
     'temp': temp,
     'hum':  hum
 })
-history = history[-24:]
+history = history[-96:]  # 最大96件（30分おき×2日分）
 
 out = {
     'temperature':     temp,
