@@ -54,10 +54,10 @@ today_str = now.strftime('%Y-%m-%d')
 
 try:
     temp = float(target['channel'][0]['value'])
-except (ValueError, TypeError):
+except (ValueError, TypeError, IndexError):
     print('温度のCommunication Errorのため前回の値を維持します')
     exit(0)
-
+    
 # 既存のdata.jsonを読み込んでhistoryを引き継ぐ
 try:
     with open('data.json') as f:
