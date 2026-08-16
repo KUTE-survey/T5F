@@ -82,8 +82,8 @@ try:
     history = existing.get('history', [])
     # 今日のデータだけ残す
     history = [h for h in history if h.get('date') == today_str]
-    # 直近60件がすべて同じ温度なら書き込みをスキップ（センサー通信不良対策）
-   if len(history) >= 60:
+    # 直近10件がすべて同じ温度なら書き込みをスキップ（センサー通信不良対策）
+    if len(history) >= 60:
         last_60_temps = [h['temp'] for h in history[-60:]]
         if len(set(last_60_temps)) == 1 and last_60_temps[0] == temp:
             print(f'直近60件すべて{temp}℃で変化なし。センサー通信不良の可能性があるためスキップします')
